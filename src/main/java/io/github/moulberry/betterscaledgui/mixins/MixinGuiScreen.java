@@ -34,6 +34,16 @@ public class MixinGuiScreen {
             ScaledResolutionOverride.setScaleOverride(-1);
 
             return scaledResolution.getScaledWidth();
+        } else if(Minecraft.getMinecraft().thePlayer != null && ((Object)this) instanceof GuiContainer) {
+            int desiredScale = ScaledResolutionOverride.getDesiredScaleOverride();
+
+            ScaledResolutionOverride.setCurrentScaleOverride(desiredScale);
+
+            ScaledResolutionOverride.setScaleOverride(desiredScale);
+            ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
+            ScaledResolutionOverride.setScaleOverride(-1);
+
+            return scaledResolution.getScaledWidth();
         }
 
         return width;
